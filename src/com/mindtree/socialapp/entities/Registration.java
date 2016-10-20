@@ -43,6 +43,20 @@ public class Registration {
 	}
 
 	/**
+	 * @param employeeId
+	 * @param employeeName
+	 * @param employeeEmail
+	 * @param event
+	 */
+	public Registration(String employeeId, String employeeName, String employeeEmail, Event event) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.employeeEmail = employeeEmail;
+		this.event = event;
+	}
+
+	/**
 	 * @return the registrationId
 	 */
 	public int getRegistrationId() {

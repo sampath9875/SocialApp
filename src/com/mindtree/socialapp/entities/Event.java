@@ -38,6 +38,9 @@ public class Event {
 	@Column(name = "Event_Date")
 	private Date eventDate;
 
+	@ManyToOne(targetEntity = User.class)
+	private User user;
+
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
 	private List<Registration> registrationsForEvent;
 
@@ -45,6 +48,110 @@ public class Event {
 	 * 
 	 */
 	public Event() {
+	}
+
+	/**
+	 * @param eventName
+	 * @param location
+	 * @param eventDate
+	 * @param user
+	 */
+	public Event(String eventName, Location location, Date eventDate, User user) {
+		super();
+		this.eventName = eventName;
+		this.location = location;
+		this.eventDate = eventDate;
+		this.user = user;
+	}
+
+	/**
+	 * @return the eventId
+	 */
+	public int getEventId() {
+		return eventId;
+	}
+
+	/**
+	 * @param eventId
+	 *            the eventId to set
+	 */
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
+	}
+
+	/**
+	 * @return the eventName
+	 */
+	public String getEventName() {
+		return eventName;
+	}
+
+	/**
+	 * @param eventName
+	 *            the eventName to set
+	 */
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+
+	/**
+	 * @return the location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location
+	 *            the location to set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	/**
+	 * @return the eventDate
+	 */
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+	/**
+	 * @param eventDate
+	 *            the eventDate to set
+	 */
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user
+	 *            the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the registrationsForEvent
+	 */
+	public List<Registration> getRegistrationsForEvent() {
+		return registrationsForEvent;
+	}
+
+	/**
+	 * @param registrationsForEvent
+	 *            the registrationsForEvent to set
+	 */
+	public void setRegistrationsForEvent(List<Registration> registrationsForEvent) {
+		this.registrationsForEvent = registrationsForEvent;
 	}
 
 }
