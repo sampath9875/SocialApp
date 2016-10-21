@@ -13,7 +13,6 @@ public class SocialAppDao {
 	 * 
 	 */
 	public SocialAppDao() {
-		
 	}
 
 }

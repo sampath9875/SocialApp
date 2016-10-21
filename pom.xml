@@ -81,6 +81,19 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.1.Final</version>
 		</dependency>
-
+		<!-- This is for teh My Sql Connector jar required for Hibernate to interact 
+			with MySql Db -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.16</version>
+		</dependency>
+		<!-- This dependency for TestNG Test cases -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
