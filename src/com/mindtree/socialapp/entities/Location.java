@@ -12,9 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 /**
  * @author azureUser
  *
@@ -31,7 +28,6 @@ public class Location {
 	private String locationDetails;
 
 	@OneToMany(targetEntity = Event.class, cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Event> eventsForLocation;
 
 	/**

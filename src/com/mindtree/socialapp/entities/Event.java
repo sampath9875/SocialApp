@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 /**
  * @author azureUser
  *
@@ -42,6 +45,7 @@ public class Event {
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Registration> registrationsForEvent;
 
 	/**
