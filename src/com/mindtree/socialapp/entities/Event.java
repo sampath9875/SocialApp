@@ -41,7 +41,7 @@ public class Event {
 	@Column(name = "Event_Date")
 	private Date eventDate;
 
-	@ManyToOne(targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class,cascade=CascadeType.ALL)
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
