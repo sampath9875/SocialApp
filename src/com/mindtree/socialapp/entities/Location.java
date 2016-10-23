@@ -45,6 +45,19 @@ public class Location {
 		this.locationDetails = locationDetails;
 	}
 
+	
+	/**
+	 * @param locationId
+	 * @param locationDetails
+	 * @param eventsForLocation
+	 */
+	public Location(int locationId, String locationDetails, List<Event> eventsForLocation) {
+		super();
+		this.locationId = locationId;
+		this.locationDetails = locationDetails;
+		this.eventsForLocation = eventsForLocation;
+	}
+
 	/**
 	 * @return the locationId
 	 */
