@@ -92,7 +92,7 @@
 <div class="col-sm-2"></div>
 <label class="col-sm-2" ></label>
 <div class="col-sm-5">
-<input type="submit" id="submit" class="form-control" value="Register" style="background-color: #B0C4DE">
+<input type="submit" id="submit" class="form-control btn btn-primary" value="Register">
 </div>
 <div class="col-sm-3"></div>
 </div></div>

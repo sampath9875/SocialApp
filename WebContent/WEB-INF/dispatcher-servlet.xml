@@ -37,7 +37,7 @@
 		base-package="com.mindtree.socialapp.controller,com.mindtree.socialapp.hibernate,com.mindtree.socialapp.test"></context:component-scan>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<property name="prefix" value="/WEB-INF/jsp/"></property>
+	<property name="prefix" value=""></property>
 	<property name="suffix" value=".jsp"></property>
 	</bean>
 </beans>
