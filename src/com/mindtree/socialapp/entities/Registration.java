@@ -11,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author azureUser
  *
  */
+@Component
 @Entity
 @Table(name = "Volunteer_Register")
 public class Registration {

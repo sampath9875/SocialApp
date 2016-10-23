@@ -19,13 +19,13 @@
       <a class="navbar-brand" href="home.jsp">Socail App</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="registration.jsp">Registration</a></li>
-      <li><a href="viewevents.jsp">View Events</a></li>
+      <li><a href="registration.get">Registration</a></li>
+      <li><a href="viewevents.get">View Events</a></li>
       <li><a href="information.jsp">Info. Events</a></li>  
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="adminsignup.jsp"><span class="glyphicon glyphicon-user"></span> Admin Registration</a></li>
-      <li><a href="adminlogin.jsp"><span class="glyphicon glyphicon-log-in"></span> Admin Login</a></li>
+      <li><a href="adminsignup.get"><span class="glyphicon glyphicon-user"></span> Admin Registration</a></li>
+      <li><a href="adminlogin.get"><span class="glyphicon glyphicon-log-in"></span> Admin Login</a></li>
    		 <li><a href="aboutus.jsp"><span class="glyphicon glyphicon-info-sign"></span> About us&nbsp;&nbsp;</a></li>
     </ul>
   </div>

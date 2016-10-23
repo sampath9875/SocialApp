@@ -18,11 +18,11 @@
       <a class="navbar-brand" href="adminhome.jsp">Socail App</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="registerevents.jsp">Register Events</a></li>
-      <li><a href="adminviewevents.jsp">View Events/Volunteers</a></li>
+      <li><a href="registerevents.get">Register Events</a></li>
+      <li><a href="adminviewevents.get">View Events/Volunteers</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-   		 <li><a href="home.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout&nbsp;&nbsp;</a></li>
+   		 <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Logout&nbsp;&nbsp;</a></li>
     </ul>
   </div>
 </nav>

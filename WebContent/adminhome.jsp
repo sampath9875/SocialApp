@@ -30,7 +30,7 @@
 <div class="jumbotron">
 <h4>Register Events</h4>
 <p>Make technology to help always</p>
-<a href="regitsterevents.jsp" class="btn btn-primary">Register Events</a>
+<a href="regitsterevents.get" class="btn btn-primary">Register Events</a>
 </div>
 </div>
 <div class="col-md-2"></div>
@@ -38,7 +38,7 @@
 <div class="jumbotron">
 <h4>Admin Login</h4>
 <p>Make technology to help always</p>
-<a href="adminviewevents.jsp" class="btn btn-primary">View Events/Volunteers</a>
+<a href="adminviewevents.get" class="btn btn-primary">View Events/Volunteers</a>
 </div>
 </div>
 </div>

@@ -23,7 +23,7 @@
 <div class="jumbotron">
 <h4>Admin Registration</h4>
 <p>Make technology to help alwaysMake technology to help alwaysMake technology to help alwaysMake technology to help always</p>
-<a href="adminsignup.jsp" class="btn btn-primary">Admin Registration</a>
+<a href="adminsignup.get" class="btn btn-primary">Admin Registration</a>
 </div>
 </div>
 <div class="col-md-1"></div>
