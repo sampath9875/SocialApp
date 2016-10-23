@@ -24,7 +24,7 @@ public class SampleController {
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String home()
 	{
-		return "registration";
+		return "home";
 	}
 	
 }

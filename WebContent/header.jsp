@@ -26,7 +26,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="adminsignup.jsp"><span class="glyphicon glyphicon-user"></span> Admin Registration</a></li>
       <li><a href="adminlogin.jsp"><span class="glyphicon glyphicon-log-in"></span> Admin Login</a></li>
-   		 <li><a href="adminlogin.jsp"><span class="glyphicon glyphicon-info-sign"></span> About us&nbsp;&nbsp;</a></li>
+   		 <li><a href="aboutus.jsp"><span class="glyphicon glyphicon-info-sign"></span> About us&nbsp;&nbsp;</a></li>
     </ul>
   </div>
 </nav>
