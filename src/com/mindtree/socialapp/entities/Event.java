@@ -43,7 +43,11 @@ public class Event {
 	@Column(name = "Event_Date")
 	private Date eventDate;
 
+<<<<<<< HEAD
 	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+=======
+	@ManyToOne(targetEntity = User.class)
+>>>>>>> branch 'FirstBranch' of https://github.com/sampath9875/SocialApp
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
