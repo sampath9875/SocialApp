@@ -27,14 +27,17 @@ public class Registration {
 	@Column(name = "Registration_Id")
 	private int registrationId;
 
-	@Column(name = "Employee_Id")
-	private String employeeId;
+	@Column(name = "Volunteer_Id")
+	private String volunteerId;
 
-	@Column(name = "Employee_Name")
-	private String employeeName;
+	@Column(name = "Volunteer_Name")
+	private String volunteerName;
 
-	@Column(name = "Employee_Email")
-	private String employeeEmail;
+	@Column(name = "Volunteer_Email")
+	private String volunteerEmail;
+
+	@Column(name = "Volunteer_phoneno")
+	private String volunteerPhoneno;
 
 	@ManyToOne(targetEntity = Event.class)
 	private Event event;
@@ -46,16 +49,21 @@ public class Registration {
 	}
 
 	/**
-	 * @param employeeId
-	 * @param employeeName
-	 * @param employeeEmail
+	 * @param registrationId
+	 * @param volunteerId
+	 * @param volunteerName
+	 * @param volunteerEmail
+	 * @param volunteerPhoneno
 	 * @param event
 	 */
-	public Registration(String employeeId, String employeeName, String employeeEmail, Event event) {
+	public Registration(int registrationId, String volunteerId, String volunteerName, String volunteerEmail,
+			String volunteerPhoneno, Event event) {
 		super();
-		this.employeeId = employeeId;
-		this.employeeName = employeeName;
-		this.employeeEmail = employeeEmail;
+		this.registrationId = registrationId;
+		this.volunteerId = volunteerId;
+		this.volunteerName = volunteerName;
+		this.volunteerEmail = volunteerEmail;
+		this.volunteerPhoneno = volunteerPhoneno;
 		this.event = event;
 	}
 
@@ -75,48 +83,63 @@ public class Registration {
 	}
 
 	/**
-	 * @return the employeeId
+	 * @return the volunteerId
 	 */
-	public String getEmployeeId() {
-		return employeeId;
+	public String getVolunteerId() {
+		return volunteerId;
 	}
 
 	/**
-	 * @param employeeId
-	 *            the employeeId to set
+	 * @param volunteerId
+	 *            the volunteerId to set
 	 */
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public void setVolunteerId(String volunteerId) {
+		this.volunteerId = volunteerId;
 	}
 
 	/**
-	 * @return the employeeName
+	 * @return the volunteerName
 	 */
-	public String getEmployeeName() {
-		return employeeName;
+	public String getVolunteerName() {
+		return volunteerName;
 	}
 
 	/**
-	 * @param employeeName
-	 *            the employeeName to set
+	 * @param volunteerName
+	 *            the volunteerName to set
 	 */
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setVolunteerName(String volunteerName) {
+		this.volunteerName = volunteerName;
 	}
 
 	/**
-	 * @return the employeeEmail
+	 * @return the volunteerEmail
 	 */
-	public String getEmployeeEmail() {
-		return employeeEmail;
+	public String getVolunteerEmail() {
+		return volunteerEmail;
 	}
 
 	/**
-	 * @param employeeEmail
-	 *            the employeeEmail to set
+	 * @param volunteerEmail
+	 *            the volunteerEmail to set
 	 */
-	public void setEmployeeEmail(String employeeEmail) {
-		this.employeeEmail = employeeEmail;
+	public void setVolunteerEmail(String volunteerEmail) {
+		this.volunteerEmail = volunteerEmail;
+	}
+
+	/**
+	 * @return the volunteerPhoneno
+	 */
+	public String getVolunteerPhoneno() {
+		return volunteerPhoneno;
+	}
+
+	/**
+	 * @param volunteerPhoneno
+	 *            the volunteerPhoneno to set
+	 */
+	public void setVolunteerPhoneno(String volunteerPhoneno) {
+		this.volunteerPhoneno = volunteerPhoneno;
 	}
 
 	/**
@@ -133,5 +156,4 @@ public class Registration {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-
 }

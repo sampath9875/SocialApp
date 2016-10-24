@@ -10,10 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author azureUser
  *
  */
+@Component
 @Entity
 @Table(name = "UserDetails")
 public class User {
