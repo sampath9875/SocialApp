@@ -18,11 +18,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.stereotype.Component;
 
 /**
  * @author azureUser
  *
  */
+@Component
 @Entity
 @Table(name = "Event_Register")
 public class Event {
@@ -41,7 +43,11 @@ public class Event {
 	@Column(name = "Event_Date")
 	private Date eventDate;
 
+<<<<<<< HEAD
+	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+=======
 	@ManyToOne(targetEntity = User.class)
+>>>>>>> branch 'FirstBranch' of https://github.com/sampath9875/SocialApp
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
@@ -55,17 +61,22 @@ public class Event {
 	}
 
 	/**
+	 * @param eventId
 	 * @param eventName
 	 * @param location
 	 * @param eventDate
 	 * @param user
+	 * @param registrationsForEvent
 	 */
-	public Event(String eventName, Location location, Date eventDate, User user) {
+	public Event(int eventId, String eventName, Location location, Date eventDate, User user,
+			List<Registration> registrationsForEvent) {
 		super();
+		this.eventId = eventId;
 		this.eventName = eventName;
 		this.location = location;
 		this.eventDate = eventDate;
 		this.user = user;
+		this.registrationsForEvent = registrationsForEvent;
 	}
 
 	/**
