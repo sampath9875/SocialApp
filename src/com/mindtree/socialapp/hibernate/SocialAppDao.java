@@ -83,4 +83,9 @@ public class SocialAppDao {
 		hibernateTemplate.save(registration);
 		return registration.getRegistrationId();
 	}
+
+	public List<Registration> getRegistrationsForEvent(Event event) {
+
+		return null;
+	}
 }
