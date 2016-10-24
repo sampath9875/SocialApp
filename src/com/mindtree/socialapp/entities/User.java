@@ -63,6 +63,20 @@ public class User {
 
 	/**
 	 * @param userId
+	 * @param userName
+	 * @param password
+	 * @param emailId
+	 */
+	public User(int userId, String userName, String password, String emailId) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.emailId = emailId;
+	}
+
+	/**
+	 * @param userId
 	 *            the userId to set
 	 */
 	public void setUserId(int userId) {

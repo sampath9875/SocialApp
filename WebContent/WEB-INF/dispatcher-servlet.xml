@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.gjt.mm.mysql.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/SocialAppDb"></property>
 		<property name="username" value="root"></property>
@@ -29,15 +32,23 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="template" class="org.springframework.orm.hibernate4.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+	<!-- <bean id="template" class="org.springframework.orm.hibernate4.HibernateTemplate"> 
+		<property name="sessionFactory" ref="sessionFactory"></property> </bean> -->
+	<!-- enable the configuration of transactional behavior based on annotations -->
+	<tx:annotation-driven transaction-manager="txManager" /><!-- 
+		a PlatformTransactionManager is still required -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- (this dependency is defined somewhere else) -->
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<context:component-scan
 		base-package="com.mindtree.socialapp.controller,com.mindtree.socialapp.entities,com.mindtree.socialapp.hibernate,com.mindtree.socialapp.test"></context:component-scan>
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<property name="prefix" value=""></property>
-	<property name="suffix" value=".jsp"></property>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="WEB-INF/JSPs/"></property>
+		<property name="suffix" value=".jsp"></property>
 	</bean>
 </beans>

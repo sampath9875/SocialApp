@@ -43,11 +43,7 @@ public class Event {
 	@Column(name = "Event_Date")
 	private Date eventDate;
 
-<<<<<<< HEAD
 	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
-=======
-	@ManyToOne(targetEntity = User.class)
->>>>>>> branch 'FirstBranch' of https://github.com/sampath9875/SocialApp
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
@@ -77,6 +73,20 @@ public class Event {
 		this.eventDate = eventDate;
 		this.user = user;
 		this.registrationsForEvent = registrationsForEvent;
+	}
+
+	/**
+	 * @param eventName
+	 * @param location
+	 * @param eventDate
+	 * @param user
+	 */
+	public Event(String eventName, Location location, Date eventDate, User user) {
+		super();
+		this.eventName = eventName;
+		this.location = location;
+		this.eventDate = eventDate;
+		this.user = user;
 	}
 
 	/**

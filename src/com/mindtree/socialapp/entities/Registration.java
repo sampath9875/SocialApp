@@ -49,6 +49,23 @@ public class Registration {
 	}
 
 	/**
+	 * @param volunteerId
+	 * @param volunteerName
+	 * @param volunteerEmail
+	 * @param volunteerPhoneno
+	 * @param event
+	 */
+	public Registration(String volunteerId, String volunteerName, String volunteerEmail, String volunteerPhoneno,
+			Event event) {
+		super();
+		this.volunteerId = volunteerId;
+		this.volunteerName = volunteerName;
+		this.volunteerEmail = volunteerEmail;
+		this.volunteerPhoneno = volunteerPhoneno;
+		this.event = event;
+	}
+
+	/**
 	 * @param registrationId
 	 * @param volunteerId
 	 * @param volunteerName
