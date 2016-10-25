@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.coyote.ajp.AjpAprProtocol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,16 +54,6 @@ public class EventController {
 	public ModelAndView register() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Location> locations=socialAppDao.getAllLocations();
-		/*List<Location> li = new ArrayList<>();
-		Location li1=new Location(1,"Bangalore",null);
-		Location li2=new Location(1,"Bangalore",null);
-		Location li3=new Location(1,"Bangalore",null);
-		Location li4=new Location(1,"Bangalore",null);
-		Location li5=new Location(1,"Bangalore",null);
-		li.add(li1);
-		li.add(li2);
-		li.add(li3);
-		li.add(li4);*/
 		map.put("locations", locations);
 		map.put("volunteer", volunteer);
 		return new ModelAndView("registration", map);
@@ -74,9 +65,9 @@ public class EventController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//List<Event> events = socialAppDao.getEventsForLocation(new Location(location, null, null));
 		List<Event> li=new ArrayList<>();
-		Event e1=new Event(1,"event1",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null,null);
-		Event e2=new Event(2,"event2",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null,null);
-		Event e3=new Event(3,"event3",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null,null);
+		Event e1=new Event(1,"event1",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null);
+		Event e2=new Event(2,"event2",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null);
+		Event e3=new Event(3,"event3",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null);
 		li.add(e1);
 		li.add(e2);
 		li.add(e3);

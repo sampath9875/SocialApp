@@ -4,7 +4,6 @@
 package com.mindtree.socialapp.entities;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,12 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
 /**
@@ -38,17 +36,16 @@ public class Event {
 	private String eventName;
 
 	@ManyToOne(targetEntity = Location.class)
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "Location_Id")
 	private Location location;
 
 	@Column(name = "Event_Date")
 	private Date eventDate;
 
 	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "User_Id")
 	private User user;
-
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Registration.class)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Registration> registrationsForEvent;
 
 	/**
 	 * 
@@ -62,17 +59,14 @@ public class Event {
 	 * @param location
 	 * @param eventDate
 	 * @param user
-	 * @param registrationsForEvent
 	 */
-	public Event(int eventId, String eventName, Location location, Date eventDate, User user,
-			List<Registration> registrationsForEvent) {
+	public Event(int eventId, String eventName, Location location, Date eventDate, User user) {
 		super();
 		this.eventId = eventId;
 		this.eventName = eventName;
 		this.location = location;
 		this.eventDate = eventDate;
 		this.user = user;
-		this.registrationsForEvent = registrationsForEvent;
 	}
 
 	/**
@@ -163,20 +157,4 @@ public class Event {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	/**
-	 * @return the registrationsForEvent
-	 */
-	public List<Registration> getRegistrationsForEvent() {
-		return registrationsForEvent;
-	}
-
-	/**
-	 * @param registrationsForEvent
-	 *            the registrationsForEvent to set
-	 */
-	public void setRegistrationsForEvent(List<Registration> registrationsForEvent) {
-		this.registrationsForEvent = registrationsForEvent;
-	}
-
 }

@@ -11,16 +11,19 @@ import com.mindtree.socialapp.hibernate.SocialAppDao;
 import org.testng.annotations.BeforeClass;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 @ContextConfiguration(locations = {
 		"file:C:/SDET-Workspaces/Shanmukha/SocialApp/WebContent/WEB-INF/dispatcher-servlet.xml" })
-public class TestHibernate {
+public class TestHibernate extends AbstractTransactionalTestNGSpringContextTests {
 
 	@Autowired
 	private SocialAppDao socialAppDao;
@@ -30,39 +33,72 @@ public class TestHibernate {
 	private User user1, user2;
 	private Registration reg1, reg2, reg3, reg4, reg5, reg6;
 
-	@Test
-	public void f() {
+	@Rollback(false)
+	@Test(priority=1)
+	public void testSaveUser() {
 		Assert.assertEquals(socialAppDao.saveUser(user1), true);
 		Assert.assertEquals(socialAppDao.saveUser(user2), true);
+	}
 
+	@Rollback(false)
+	@Test(priority=2)
+	public void testGetUser() {
+		Assert.assertEquals(socialAppDao.getUser(user1.getUserName()).getUserId(), user1.getUserId());
+		Assert.assertEquals(socialAppDao.getUser(user2.getUserName()).getUserId(), user2.getUserId());
+	}
+
+	@Rollback(false)
+	@Test(priority=3)
+	public void testRegisterEvent() {
 		Assert.assertNotEquals(socialAppDao.registerEvent(event1), 0);
 		Assert.assertNotEquals(socialAppDao.registerEvent(event2), 0);
 		Assert.assertNotEquals(socialAppDao.registerEvent(event3), 0);
 		Assert.assertNotEquals(socialAppDao.registerEvent(event4), 0);
 		Assert.assertNotEquals(socialAppDao.registerEvent(event5), 0);
 		Assert.assertNotEquals(socialAppDao.registerEvent(event6), 0);
+	}
 
-		Assert.assertEquals(socialAppDao.getAllLocations().size(), 4);
+	@Rollback(false)
+	@Test(priority=4)
+	public void testGetAllLocations() {
+		List<Location> locations = socialAppDao.getAllLocations();
+		Assert.assertEquals(locations.size(), 4);
+	}
 
+	@Rollback(false)
+	@Test(priority=5)
+	public void testGetEventsForDate() {
 		long current = new Date().getTime();
 
 		Assert.assertEquals(socialAppDao.getEventsForDate(new Date(current + TimeUnit.DAYS.toMillis(1))).size(), 1);
 		Assert.assertEquals(socialAppDao.getEventsForDate(new Date(current + TimeUnit.DAYS.toMillis(2))).size(), 2);
 		Assert.assertEquals(socialAppDao.getEventsForDate(new Date(current + TimeUnit.DAYS.toMillis(3))).size(), 2);
 		Assert.assertEquals(socialAppDao.getEventsForDate(new Date(current + TimeUnit.DAYS.toMillis(4))).size(), 1);
+	}
 
+	@Rollback(false)
+	@Test(priority=6)
+	public void testGetEventsForLocation() {
 		Assert.assertEquals(socialAppDao.getEventsForLocation(location1).size(), 1);
 		Assert.assertEquals(socialAppDao.getEventsForLocation(location2).size(), 2);
 		Assert.assertEquals(socialAppDao.getEventsForLocation(location3).size(), 2);
 		Assert.assertEquals(socialAppDao.getEventsForLocation(location4).size(), 1);
+	}
 
+	@Rollback(false)
+	@Test(priority=7)
+	public void testRegisterForEvent() {
 		Assert.assertNotEquals(socialAppDao.registerForEvent(reg1), 0);
 		Assert.assertNotEquals(socialAppDao.registerForEvent(reg2), 0);
 		Assert.assertNotEquals(socialAppDao.registerForEvent(reg3), 0);
 		Assert.assertNotEquals(socialAppDao.registerForEvent(reg4), 0);
 		Assert.assertNotEquals(socialAppDao.registerForEvent(reg5), 0);
 		Assert.assertNotEquals(socialAppDao.registerForEvent(reg6), 0);
+	}
 
+	@Rollback(false)
+	@Test(priority=8)
+	public void testGetRegistrationsForEvent() {
 		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event1).size(), 1);
 		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event2).size(), 2);
 		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event3).size(), 2);
