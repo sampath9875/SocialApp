@@ -3,10 +3,13 @@
  */
 package com.mindtree.socialapp.hibernate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
@@ -30,10 +33,6 @@ import com.mindtree.socialapp.entities.User;
 @Transactional
 public class SocialAppDao {
 
-	/*
-	 * @Autowired private HibernateTemplate hibernateTemplate;
-	 */
-
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -54,7 +53,6 @@ public class SocialAppDao {
 	public boolean saveUser(User user) {
 		Session session = getSession();
 		session.save(user);
-		// hibernateTemplate.save(user);
 		return true;
 	}
 
@@ -63,12 +61,9 @@ public class SocialAppDao {
 
 		Session session = getSession();
 		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-		criteria.add(Restrictions.eq("username", username));
+		criteria.add(Restrictions.eq("userName", username));
 
 		loadedUser = (User) criteria.getExecutableCriteria(session).uniqueResult();
-
-		// loadedUser = (User) hibernateTemplate.find("Select U from User U
-		// where u.user_name=?", username).get(0);
 
 		return loadedUser;
 	}
@@ -76,31 +71,41 @@ public class SocialAppDao {
 	public int registerEvent(Event event) {
 		Session session = getSession();
 		session.save(event);
-		// hibernateTemplate.save(event);
 		return event.getEventId();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Location> getAllLocations() {
 		Session session = getSession();
-
-		return (List<Location>) DetachedCriteria.forClass(User.class).getExecutableCriteria(session).list();
-		// hibernateTemplate.find("Select L from Location L");
+		return (List<Location>) session.createCriteria(Location.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Event> getEventsForLocation(Location location) {
-		Location loadedLocation;
-		// = (Location) hibernateTemplate.find("Select L from Location L where
-		// l.location_id=?",
-		// location.getLocationId());
 		Session session = getSession();
-		loadedLocation = session.load(Location.class, location.getLocationId());
-		return loadedLocation.getEventsForLocation();
+
+		Query query = session.createQuery("from Event e where e.location.locationId=?").setParameter(0,
+				location.getLocationId());
+		List<Event> events = query.list();
+
+		return events;
+	}
+
+	public int saveLocation(Location location) {
+		Session session = getSession();
+		session.save(location);
+
+		return location.getLocationId();
 	}
 
 	public List<Event> getEventsForDate(Date date) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Event.class);
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			date = dateFormat.parse(dateFormat.format(date));
+		} catch (ParseException e) {
+		}
 		long eventDate = date.getTime();
 
 		Date fromDate = new Date(eventDate);
@@ -108,10 +113,6 @@ public class SocialAppDao {
 		criteria.add(Restrictions.ge("eventDate", fromDate));
 		criteria.add(Restrictions.lt("eventDate", toDate));
 
-		/*
-		 * @SuppressWarnings("unchecked") (List<Event>)
-		 * hibernateTemplate.findByCriteria(criteria);
-		 */
 		@SuppressWarnings("unchecked")
 		List<Event> eventsForDate = criteria.getExecutableCriteria(getSession()).list();
 		return eventsForDate;
@@ -120,13 +121,16 @@ public class SocialAppDao {
 	public int registerForEvent(Registration registration) {
 		Session session = getSession();
 		session.save(registration);
-		// hibernateTemplate.save(registration);
 		return registration.getRegistrationId();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Registration> getRegistrationsForEvent(Event event) {
 		Session session = getSession();
-		Event loadedEvent = session.load(Event.class, event.getEventId());
-		return loadedEvent.getRegistrationsForEvent();
+		Query query = session.createQuery("from Registration r where r.event.eventId=?").setParameter(0,
+				event.getEventId());
+		List<Registration> registrations = query.list();
+
+		return registrations;
 	}
 }
