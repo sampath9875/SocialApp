@@ -3,6 +3,7 @@
  */
 package com.mindtree.socialapp.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -156,5 +157,10 @@ public class Event {
 	 */
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String format(Date date)
+	{
+		return new SimpleDateFormat("dd MMM yyyy").format(date);
 	}
 }

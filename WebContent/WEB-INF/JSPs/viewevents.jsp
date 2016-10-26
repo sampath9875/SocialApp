@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -18,39 +18,25 @@
 <body style="background-color: lavendar;overflow: hidden" >
 <jsp:include page="header.jsp" />
 <div class="container">
-<table class="table table-responsive">
+<table class="table table-striped">
     <thead>
-      <tr class="active">
+      <tr class="info">
         <th>Event Name</th>
         <th>Event Date</th>
         <th>Event Location</th>
-        <th>Event Info</th>
         <th>Registration Link</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Serving</td>
-        <td>12/02/2016</td>
-        <td>Bangalore</td>
-        <td>Serving lunch</td>
-        <td><a href="registration.jsp">Click to Register</a></td>
-      </tr>
-      <tr>
-        <td>Serving</td>
-        <td>12/02/2016</td>
-        <td>Bangalore</td>
-        <td>Serving lunch</td>
-         <td><a href="registration.jsp">Click to Register</a></td>
-      </tr>
-      <tr>
-        <td>Serving</td>
-        <td>12/02/2016</td>
-        <td>Bangalore</td>
-        <td>Serving lunch</td>
-         <td><a href="registration.jsp">Click to Register</a></td>
-      </tr>
-      </tbody>
+    <jstl:forEach items="${events}" var="event">
+    <tr>
+    <td><jstl:out value="${event.eventName}"></jstl:out></td>
+    <td><jstl:out value="${event.format(event.getEventDate())}"></jstl:out></td>
+    <td><jstl:out value="${event.location.locationDetails}"></jstl:out></td>
+    <td><a href="registration.get">Click to Register</a></td>
+    </tr>
+    </jstl:forEach>
+     </tbody>
   </table>
 </div>
 <jsp:include page="footer.jsp" />

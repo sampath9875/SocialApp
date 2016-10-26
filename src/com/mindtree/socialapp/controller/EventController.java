@@ -3,9 +3,7 @@
  */
 package com.mindtree.socialapp.controller;
 
-import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +12,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.coyote.ajp.AjpAprProtocol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mindtree.socialapp.entities.Event;
@@ -49,11 +47,16 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String homepage() {
+		return "home";
+	}
+	
+	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home() {
 		return "home";
 	}
 
-	@RequestMapping(value = "registration", method = RequestMethod.GET)
+	@RequestMapping(value = "registration.get", method = RequestMethod.GET)
 	public ModelAndView register() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Location> locations=socialAppDao.getAllLocations();
@@ -69,8 +72,50 @@ public class EventController {
 		Location loc=new Location();
 		loc.setLocationId(locationId);
 		List<Event> li=socialAppDao.getEventsForLocation(loc);
-		System.out.println(locationId + "Hello"+li.size());
-		String str="{ '1': 'test 1', '2': 'test ' }";
+		String str="{ ";
+		for(Event event : li) {
+		str+="'"+event.getEventId()+"': "+"'"
+					+event.format(event.getEventDate())+"-"
+					+ event.getEventName()+"',";
+		}
+		str+=" }";
 		return str;
+	}
+	
+	@RequestMapping(value="register.action",method=RequestMethod.POST)
+	public String registerVolunteer(@ModelAttribute Registration volunteer)
+	{
+		int registrationid=socialAppDao.registerForEvent(volunteer);
+		if(registrationid>0)
+		{	
+			return "redirect:/success";
+		}
+		else{
+			return "redirect:/error";
+		}
+	}
+	
+	@RequestMapping(value = "/success", method = RequestMethod.GET)
+	public String success(Model model) {
+		model.addAttribute("message","You are registerd successfully");
+		return "success";
+	}
+	
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error(Model model) {
+		model.addAttribute("message","Some Error occured please try after some time");
+		return "error";
+	}
+	
+	@RequestMapping(value = "viewevents.get", method = RequestMethod.GET)
+	public ModelAndView viewEvents() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Location> locations=socialAppDao.getAllLocations();
+		List<Event> li = new ArrayList<>();
+		for (Location location : locations) {
+			li.addAll(socialAppDao.getEventsForLocation(location));
+		}
+		map.put("events", li);
+		return new ModelAndView("viewevents", map);
 	}
 }
