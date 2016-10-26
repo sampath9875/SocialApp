@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.coyote.ajp.AjpAprProtocol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mindtree.socialapp.entities.Event;
@@ -59,23 +62,15 @@ public class EventController {
 		return new ModelAndView("registration", map);
 	}
 
-	@RequestMapping(value = "getEvents", method = RequestMethod.GET)
-	public void getEvents(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-		int location = Integer.parseInt(request.getParameter("location"));
-		Map<String, Object> map = new HashMap<String, Object>();
-		//List<Event> events = socialAppDao.getEventsForLocation(new Location(location, null, null));
-		List<Event> li=new ArrayList<>();
-		Event e1=new Event(1,"event1",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null,null);
-		Event e2=new Event(2,"event2",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null,null);
-		Event e3=new Event(3,"event3",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null,null);
-		li.add(e1);
-		li.add(e2);
-		li.add(e3);
-		map.put("events", li);
-		try {
-			response.getWriter().close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	@ResponseBody
+	@RequestMapping(value = "getEvents", method = RequestMethod.GET,produces = "application/json")
+	public String getEvents(@RequestBody String location,HttpServletRequest request, HttpServletResponse response) throws ParseException {
+		int locationId = Integer.parseInt(request.getParameter("location"));
+		Location loc=new Location();
+		loc.setLocationId(locationId);
+		List<Event> li=socialAppDao.getEventsForLocation(loc);
+		System.out.println(locationId + "Hello"+li.size());
+		String str="{ '1': 'test 1', '2': 'test ' }";
+		return str;
 	}
 }

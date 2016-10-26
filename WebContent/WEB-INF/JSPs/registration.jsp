@@ -11,13 +11,48 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <title>Registration</title>
 <script type="text/javascript">
-var xmlHttp;
+jQuery(document).ready(function(){
+	$('#location').change(function (){
+		var optionSelected=$("option:selected",this);
+		var val=this.value;
+		ajaxLoad(val);
+	});
+});
+function ajaxLoad(location)
+{
+$.ajax({
+	type : "get",
+	contentType : "application/text",
+	url : "getEvents",
+	data : {"location" : location},
+	success: function (data)
+	{
+		var json = JSON.stringify(eval("(" + data + ")"));
+		var data1=JSON.parse(json);
+		$.each(data1, function(key, value) {   
+		     $('#eventName')
+		         .append($("<option></option>")
+		                    .attr("value",key)
+		                    .text(value)); 
+		});
+	},
+	error : function(){
+		alert("fail");
+	},
+	done : function() {
+		alert("done");
+	}
+});
+}
+/* var xmlHttp;
 function display(location)
 {
 if(!location.equals("select"))
@@ -35,7 +70,7 @@ if(window.XMLHttpRequest)
 			document.getElementById("div1").innerHTML=res;
 			}
 	}
-}
+} */
 </script>
 </head>
 <body style="background-color: lavendar;overflow: hidden" >
@@ -74,8 +109,8 @@ if(window.XMLHttpRequest)
 <div class="col-sm-2"></div>
 <label class="col-sm-2" for="phone">Enter your phone number</label>
 <div class="col-sm-5">
-<form:input type="text" id="location" onchange="display(this.value)" class="form-control" path="event.location.locationDetails" />
-<form:errors path="event.location.locationDetails" class="control label" />
+<form:input type="text" id="phone" class="form-control" path="volunteerPhoneno" />
+<form:errors path="volunteerPhoneno" class="control label" />
 </div>
 <div class="col-sm-3"></div>
 </div></div>
@@ -92,7 +127,7 @@ if(window.XMLHttpRequest)
 <div class="form-group">
 <div class="row">
 <div class="col-sm-2"></div>
-<label class="col-sm-2" for="phone">Select Location</label>
+<label class="col-sm-2" for="location">Select Location</label>
 <div class="col-sm-5">
 <form:select path="event.location.locationDetails" id="location" class="form-control" onchange="display(this.value)">
 <form:option value="select">Select location..</form:option>
@@ -107,13 +142,13 @@ if(window.XMLHttpRequest)
 <div class="form-group">
 <div class="row">
 <div class="col-sm-2"></div>
-<label class="col-sm-2" for="phone">Select event</label>
+<label class="col-sm-2" for="eventName">Select event</label>
 <div class="col-sm-5">
-<form:select path="event.eventName" id="eventName" class="form-control">
+<form:select path="event.eventName" id="eventName" class="form-control" placeHolder="select">
 <form:option value="select">Select event..</form:option>
-<jstl:forEach items="${events}" var="events1">
+<%-- <jstl:forEach items="${events}" var="events1">
 <form:option value="${events1.eventId}">${events1.eventName} - ${events1.eventName}</form:option>
-</jstl:forEach>
+</jstl:forEach> --%>
 </form:select>
 <form:errors path="event.eventName" cssClass="error"></form:errors>
 </div>
