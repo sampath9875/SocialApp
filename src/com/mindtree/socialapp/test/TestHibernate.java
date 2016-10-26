@@ -102,7 +102,7 @@ public class TestHibernate extends AbstractTransactionalTestNGSpringContextTests
 		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event1).size(), 1);
 		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event2).size(), 2);
 		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event3).size(), 2);
-		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event4).size(), 1);		
+		Assert.assertEquals(socialAppDao.getRegistrationsForEvent(event4).size(), 1);
 	}
 	
 	@BeforeClass

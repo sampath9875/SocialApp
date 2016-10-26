@@ -3,13 +3,11 @@
  */
 package com.mindtree.socialapp.entities;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,14 +19,12 @@ import javax.persistence.Table;
 public class Location {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Location_Id")
 	private int locationId;
 
 	@Column(name = "Location_Details")
 	private String locationDetails;
-
-	@OneToMany(targetEntity = Event.class, cascade = CascadeType.ALL)
-	private List<Event> eventsForLocation;
 
 	/**
 	 * 
@@ -45,17 +41,14 @@ public class Location {
 		this.locationDetails = locationDetails;
 	}
 
-	
 	/**
 	 * @param locationId
 	 * @param locationDetails
-	 * @param eventsForLocation
 	 */
-	public Location(int locationId, String locationDetails, List<Event> eventsForLocation) {
+	public Location(int locationId, String locationDetails) {
 		super();
 		this.locationId = locationId;
 		this.locationDetails = locationDetails;
-		this.eventsForLocation = eventsForLocation;
 	}
 
 	/**
@@ -87,20 +80,4 @@ public class Location {
 	public void setLocationDetails(String locationDetails) {
 		this.locationDetails = locationDetails;
 	}
-
-	/**
-	 * @return the eventsForLocation
-	 */
-	public List<Event> getEventsForLocation() {
-		return eventsForLocation;
-	}
-
-	/**
-	 * @param eventsForLocation
-	 *            the eventsForLocation to set
-	 */
-	public void setEventsForLocation(List<Event> eventsForLocation) {
-		this.eventsForLocation = eventsForLocation;
-	}
-
 }
