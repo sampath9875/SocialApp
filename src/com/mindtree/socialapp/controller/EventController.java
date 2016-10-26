@@ -62,7 +62,6 @@ public class EventController {
 		return new ModelAndView("registration", map);
 	}
 
-<<<<<<< HEAD
 	@ResponseBody
 	@RequestMapping(value = "getEvents", method = RequestMethod.GET,produces = "application/json")
 	public String getEvents(@RequestBody String location,HttpServletRequest request, HttpServletResponse response) throws ParseException {
@@ -73,25 +72,5 @@ public class EventController {
 		System.out.println(locationId + "Hello"+li.size());
 		String str="{ '1': 'test 1', '2': 'test ' }";
 		return str;
-=======
-	@RequestMapping(value = "getEvents", method = RequestMethod.GET)
-	public void getEvents(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-		int location = Integer.parseInt(request.getParameter("location"));
-		Map<String, Object> map = new HashMap<String, Object>();
-		//List<Event> events = socialAppDao.getEventsForLocation(new Location(location, null, null));
-		List<Event> li=new ArrayList<>();
-		Event e1=new Event(1,"event1",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null);
-		Event e2=new Event(2,"event2",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null);
-		Event e3=new Event(3,"event3",null,new SimpleDateFormat("MM-dd-yyyy").parse("12-20-2016"),null);
-		li.add(e1);
-		li.add(e2);
-		li.add(e3);
-		map.put("events", li);
-		try {
-			response.getWriter().close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
->>>>>>> branch 'FirstBranch' of https://github.com/sampath9875/SocialApp
 	}
 }
