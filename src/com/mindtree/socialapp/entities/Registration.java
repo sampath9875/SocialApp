@@ -25,23 +25,23 @@ public class Registration {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "Registration_Id")
+	@Column(name = "Registration_Id", nullable = false)
 	private int registrationId;
 
-	@Column(name = "Volunteer_Id")
+	@Column(name = "Volunteer_Id", nullable = false)
 	private String volunteerId;
 
-	@Column(name = "Volunteer_Name")
+	@Column(name = "Volunteer_Name", nullable = false)
 	private String volunteerName;
 
-	@Column(name = "Volunteer_Email")
+	@Column(name = "Volunteer_Email", nullable = false)
 	private String volunteerEmail;
 
-	@Column(name = "Volunteer_phoneno")
+	@Column(name = "Volunteer_phoneno", nullable = false)
 	private String volunteerPhoneno;
 
 	@ManyToOne(targetEntity = Event.class)
-	@JoinColumn(name = "Event_Id")
+	@JoinColumn(name = "Event_Id", nullable = false)
 	private Event event;
 
 	/**

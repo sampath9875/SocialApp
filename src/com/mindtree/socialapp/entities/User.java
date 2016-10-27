@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,22 +19,41 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Entity
 @Table(name = "UserDetails")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "User_Id")
+	@Column(name = "User_Id", nullable = false)
 	private int userId;
 
-	@Column(name = "UserName", unique = true)
+	@Column(name = "Name", nullable = false)
+	private String name;
+
+	@Column(name = "UserName", unique = true, nullable = false)
 	private String userName;
 
-	@Column(name = "Password")
+	@Column(name = "Password", nullable = false)
 	private String password;
 
-	@Column(name = "Email_Id")
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "Email_Id", nullable = false)
 	private String emailId;
 
 	/**
@@ -67,9 +88,10 @@ public class User {
 	 * @param password
 	 * @param emailId
 	 */
-	public User(int userId, String userName, String password, String emailId) {
+	public User(int userId, String userName, String name, String password, String emailId) {
 		super();
 		this.userId = userId;
+		this.name = name;
 		this.userName = userName;
 		this.password = password;
 		this.emailId = emailId;

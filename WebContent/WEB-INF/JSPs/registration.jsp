@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -35,9 +35,10 @@
 		var emailCheck = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 		var nameCheck = /[a-zA-Z ]{3,20}$/;
 		var phoneCheck = /^[9,8,7][0-9]{9}$/;
-		
-		if (name=="") {
-			alert("Please Enter Name");
+
+		if (name == "") {
+			//alert("Please Enter Name");
+			name.innerHTML="Please Enter a name";
 			document.getElementById("name").focus();
 			return false;
 		} else if (!nameCheck.test(name)) {
@@ -54,7 +55,7 @@
 			document.getElementById("email").value = "";
 			document.getElementById("email").focus();
 			return false;
-		} else if (phone=="") {
+		} else if (phone == "") {
 			alert("please enter phone number");
 			document.getElementById("phone").focus();
 			return false;
@@ -112,18 +113,18 @@
 		});
 	}
 	function init() {
-		document.getElementById("name").value="";
-		document.getElementById("phone").value="";
-		document.getElementById("email").value="";
-		document.getElementById("location").value="select";
-		document.getElementById("eventName").value="select";
-		document.getElementById("messagediv").innerHTML="";
-		}
+		document.getElementById("name").value = "";
+		document.getElementById("phone").value = "";
+		document.getElementById("email").value = "";
+		document.getElementById("location").value = "select";
+		document.getElementById("eventName").value = "select";
+	}
 
-		//window.onload = init;
+	//window.onload = init;
 </script>
 </head>
-<body style="background-color: lavendar; overflow: hidden" onload="init()">
+<body style="background-color: lavendar; overflow: hidden"
+	onload="init()">
 	<jsp:include page="header.jsp" />
 	<form:form id="registration" onsubmit="return validate();"
 		class="form-horizontal" method="post" action="register.action"
@@ -136,8 +137,7 @@
 						<div class="col-sm-3">
 							<h4>Register Here</h4>
 						</div>
-						<div class="col-sm-7">		
-						</div>
+						<div class="col-sm-7"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -201,7 +201,7 @@
 						<div class="col-sm-5">
 							<form:select path="event.eventId" id="eventName"
 								class="form-control">
-								 <form:option value="select">Select Event..</form:option>
+								<form:option value="select">Select Event..</form:option>
 								<%-- <jstl:forEach items="${events}" var="events1">
 <form:option value="${events1.eventId}">${events1.eventName} - ${events1.eventName}</form:option>
 </jstl:forEach> --%>

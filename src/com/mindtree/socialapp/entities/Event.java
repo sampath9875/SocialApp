@@ -30,22 +30,22 @@ public class Event {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "Event_Id")
+	@Column(name = "Event_Id", nullable = false)
 	private int eventId;
 
-	@Column(name = "Event_Name")
+	@Column(name = "Event_Name", nullable = false)
 	private String eventName;
 
 	@ManyToOne(targetEntity = Location.class)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "Location_Id")
+	@JoinColumn(name = "Location_Id", nullable = false)
 	private Location location;
 
-	@Column(name = "Event_Date")
+	@Column(name = "Event_Date", nullable = false)
 	private Date eventDate;
 
 	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "User_Id")
+	@JoinColumn(name = "User_Id", nullable = false)
 	private User user;
 
 	/**
@@ -158,9 +158,8 @@ public class Event {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	public String format(Date date)
-	{
+
+	public String format(Date date) {
 		return new SimpleDateFormat("dd MMM yyyy").format(date);
 	}
 }

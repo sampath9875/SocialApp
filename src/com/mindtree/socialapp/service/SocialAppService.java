@@ -37,10 +37,19 @@ public class SocialAppService {
 
 		if (loadedUser == null)
 			throw new InvalidLoginException("User with Username:" + user.getUserName() + " does not exist");
-		else if (loadedUser.getPassword().equalsIgnoreCase(user.getPassword()))
+		else if (!loadedUser.getPassword().equals(user.getPassword()))
 			throw new InvalidLoginException("Incorrect Password. Please Try again");
 		else
 			return loadedUser;
+	}
+
+	public boolean validUser(String userName) {
+		User loadedUser = socialAppDao.getUser(userName);
+
+		if (loadedUser == null)
+			return true;
+		else
+			return false;
 	}
 
 	public boolean saveUser(User user) {
