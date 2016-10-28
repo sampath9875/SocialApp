@@ -22,7 +22,7 @@
       <li><a href="adminviewevents.get">View Events/Volunteers</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-   		 <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Logout&nbsp;&nbsp;</a></li>
+   		 <li><a href="logout.action"><span class="glyphicon glyphicon-log-out"></span> Logout&nbsp;&nbsp;</a></li>
     </ul>
   </div>
 </nav>

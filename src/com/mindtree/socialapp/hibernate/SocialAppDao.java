@@ -124,6 +124,11 @@ public class SocialAppDao {
 		return registration.getRegistrationId();
 	}
 
+	public Location getLocationById(int id) {
+		Session session = getSession();
+		return session.get(Location.class, id);
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Registration> getRegistrationsForEvent(Event event) {
 		Session session = getSession();

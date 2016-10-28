@@ -79,4 +79,8 @@ public class SocialAppService {
 	public int registerForEvent(Registration registration) {
 		return socialAppDao.registerForEvent(registration);
 	}
+
+	public Location getLocationById(int id) {
+		return socialAppDao.getLocationById(id);
+	}
 }

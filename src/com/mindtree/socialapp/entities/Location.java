@@ -23,7 +23,7 @@ public class Location {
 	@Column(name = "Location_Id", nullable = false)
 	private int locationId;
 
-	@Column(name = "Location_Details", nullable = false)
+	@Column(name = "Location_Details")
 	private String locationDetails;
 
 	/**

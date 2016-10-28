@@ -3,7 +3,10 @@
  */
 package com.mindtree.socialapp.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mindtree.socialapp.entities.Event;
+import com.mindtree.socialapp.entities.Location;
+import com.mindtree.socialapp.entities.Registration;
 import com.mindtree.socialapp.entities.User;
 import com.mindtree.socialapp.exceptions.InvalidLoginException;
 import com.mindtree.socialapp.service.SocialAppService;
@@ -90,10 +95,9 @@ public class AdminController {
 
 	@RequestMapping(value = "adminLogin.action", method = RequestMethod.GET)
 	public String loginRedirect(Model model, HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
-			model.addAttribute("message", "Please login to access admin module");
-			return "adminlogin";
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
 		} else
 			return "adminhome";
 	}
@@ -117,10 +121,9 @@ public class AdminController {
 
 	@RequestMapping(value = "registerevents.get", method = RequestMethod.GET)
 	public String registerEvents(Model model, HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
-			model.addAttribute("message", "Please login to access admin module");
-			return "adminlogin";
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
 		} else {
 			model.addAttribute("locations", socialAppService.getAllLocations());
 			model.addAttribute("event", event);
@@ -130,18 +133,102 @@ public class AdminController {
 
 	@RequestMapping(value = "adminviewevents.get", method = RequestMethod.GET)
 	public String viewEvents(Model model, HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
-			model.addAttribute("message", "Please login to access admin module");
-			return "adminlogin";
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
 		} else {
+			model.addAttribute("locations", socialAppService.getAllLocations());
+			model.addAttribute("event", event);
+			return "adminviewevents";
+		}
+	}
+
+	@RequestMapping(value = "registerEvent.action", method = RequestMethod.GET)
+	public String registerEventGet(Model model, HttpServletRequest request) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else {
+			model.addAttribute("locations", socialAppService.getAllLocations());
+			model.addAttribute("event", event);
+			return "registerevents";
+		}
+	}
+
+	@RequestMapping(value = "registerEvent.action", method = RequestMethod.POST)
+	public String registerEvent(@ModelAttribute Event event, BindingResult result, HttpServletRequest request,
+			Model model) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else if (result.hasErrors()) {
+			return "redirect:/error?message=The%20user%20object%20passed%20has%20some%20errors2E%20Please%20try%20again";
+		} else {
+			event.setLocation(socialAppService.getLocationById(event.getLocation().getLocationId()));
+			event.setUser(sessionUser);
+			int eventId = socialAppService.registerEvent(event);
+			if (eventId > 0)
+				model.addAttribute("eventId", eventId);
+			else
+				model.addAttribute("message", "Failed to register Event. Please try again");
+			return "adminhome";
+		}
+	}
+
+	@RequestMapping(value = "getEvents.action", method = RequestMethod.POST)
+	public String viewEventsPage(@ModelAttribute Event event, Model model, HttpServletRequest request) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else {
+			List<Event> events;
+			if (event == null)
+				return "adminhome";
+			else {
+				Location location = event.getLocation();
+				if (location.getLocationId() == 0) {
+					events = socialAppService.getEventsForDate(event.getEventDate());
+				} else
+					events = socialAppService.getEventsForLocation(location);
+				model.addAttribute("events", events);
+			}
+
 			return "viewevents";
 		}
 	}
 
-	@RequestMapping(value = "registerEvnet.action", method = RequestMethod.POST)
-	public String ergisterEvent(@ModelAttribute Event event, BindingResult result, HttpServletRequest request) {
-		
-		return "";
+	@RequestMapping(value = "adminHome.get", method = RequestMethod.GET)
+	public String adminHome(Model model, HttpServletRequest request) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else
+			return "adminhome";
+	}
+
+	@RequestMapping(value = "viewVolunteers", method = RequestMethod.GET)
+	public String viewRegistrations(Model model, HttpServletRequest request) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else {
+			int eventId = Integer.parseInt(request.getParameter("eventId"));
+			Event selectedEvent = new Event();
+			selectedEvent.setEventId(eventId);
+			model.addAttribute("registrations", socialAppService.getRegistrationsForEvent(selectedEvent));
+			return "viewvolunteers";
+		}
+	}
+
+	@RequestMapping(value = "logout.action", method = RequestMethod.GET)
+	public String logoutInvalidateSession(Model model, HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "home";
+	}
+
+	public String loginMandate(Model model) {
+		model.addAttribute("message", "Please login to access admin module");
+		model.addAttribute("user", user);
+		return "adminlogin";
 	}
 }

@@ -1,58 +1,123 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=100%, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<script type="text/javascript">
+	function validateForm() {
+		var location = document.getElementById("location").value;
+		var eventDate = document.getElementById("eventDate").value;
+
+		if (location == "0" && eventDate == "") {
+			document.getElementById("errorMessage").innerHTML = "Please select a location or a date";
+			return false;
+		} else {
+			return true;
+		}
+	};
+</script>
 <title>View Events</title>
 </head>
-<body style="background-color: lavendar;overflow: hidden" >
-<jsp:include page="adminheader.jsp" />
-<div class="container">
-<table class="table table-responsive">
-    <thead>
-      <tr class="active">
-        <th>Event Name</th>
-        <th>Event Date</th>
-        <th>Event Location</th>
-        <th>Event Info</th>
-        <th>View Volunteers</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Serving</td>
-        <td>12/02/2016</td>
-        <td>Bangalore</td>
-        <td>Serving lunch</td>
-        <td><a href="viewvolunteers.jsp">Click to View</a></td>
-      </tr>
-      <tr>
-        <td>Serving</td>
-        <td>12/02/2016</td>
-        <td>Bangalore</td>
-        <td>Serving lunch</td>
-         <td><a href="viewvolunteers.jsp">Click to View</a></td>
-      </tr>
-      <tr>
-        <td>Serving</td>
-        <td>12/02/2016</td>
-        <td>Bangalore</td>
-        <td>Serving lunch</td>
-         <td><a href="viewvolunteers.jsp">Click to View</a></td>
-      </tr>
-      </tbody>
-  </table>
-</div>
-<jsp:include page="footer.jsp" />
+<body style="background-color: lavendar; overflow: hidden">
+	<jsp:include page="adminheader.jsp" />
+	<jstl:if test="${message!=null}">
+		<div class="container">
+			<div class="row">
+				<div class="jumbotron">
+					<div id="errorMessage">
+						<jstl:out value="${message}"></jstl:out>
+					</div>
+				</div>
+			</div>
+		</div>
+	</jstl:if>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="jumbotron">
+					<h4>Admin Registration</h4>
+					<p>If you are an admin please register here</p>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<div class="jumbotron">
+					<form:form method="post" onsubmit="return validateForm()"
+						action="getEvents.action" commandName="event">
+						<h4>Search Events</h4>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<label class="col-sm-1" for="email">Enter Event location</label>
+								<div class="col-sm-5">
+									<form:select path="location.locationId" id="location"
+										class="form-control" onchange="display(this.value)">
+										<form:option value="0">Select location..</form:option>
+										<jstl:forEach items="${locations}" var="location">
+											<form:option value="${location.locationId}"> ${location.locationDetails} </form:option>
+										</jstl:forEach>
+									</form:select>
+									<form:errors path="location.locationId" cssClass="error" />
+									<span id="locationError"></span>
+								</div>
+								<div class="col-sm-3"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<label class="col-sm-1" for="phone">Select date</label>
+								<div class="col-sm-5">
+									<div class="input-group date" data-provide="datepicker">
+										<form:input type="text" class="form-control" id="eventDate"
+											readonly="readonly" path="eventDate" value="01/01/1970"/>
+										<span id="dateError"></span>
+										<div class="input-group-addon">
+											<span class="glyphicon glyphicon-th"></span>
+										</div>
+									</div>
+									<script type="text/javascript">
+										var nowDate = new Date();
+										var today = new Date(nowDate
+												.getFullYear(), nowDate
+												.getMonth(), nowDate.getDate(),
+												0, 0, 0, 0);
+										$('.datepicker').datepicker({
+											todayHighlight : 1
+										});
+									</script>
+								</div>
+								<div class="col-sm-3"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" id="submit"
+								class="form-control btn btn-primary" value="Search">
+						</div>
+					</form:form>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

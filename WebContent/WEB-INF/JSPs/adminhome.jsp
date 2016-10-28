@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +33,28 @@
 			</div>
 		</div>
 	</div>
+	<jstl:if test="${message!=null}">
+		<div class="container">
+			<div class="row">
+				<div class="jumbotron">
+					<div>
+						<jstl:out value="${message}"></jstl:out>
+					</div>
+				</div>
+			</div>
+		</div>
+	</jstl:if>
+	<jstl:if test="${eventId!=null}">
+		<div class="container">
+			<div class="row">
+				<div class="jumbotron">
+					<div>
+						<jstl:out value="Event Successfully registered with Id: ${eventId}"></jstl:out>
+					</div>
+				</div>
+			</div>
+		</div>
+	</jstl:if>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5">

@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -42,6 +43,7 @@ public class Event {
 	private Location location;
 
 	@Column(name = "Event_Date", nullable = false)
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private Date eventDate;
 
 	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)

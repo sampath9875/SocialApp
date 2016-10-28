@@ -105,8 +105,9 @@
 						<label class="col-sm-2" for="phone">Select date</label>
 						<div class="col-sm-5">
 							<div class="input-group date" data-provide="datepicker">
-								<input type="text" class="form-control" id="eventDate"
-									disabled="disabled"> <span id="dateError"></span>
+								<form:input type="text" class="form-control" id="eventDate"
+									readonly="readonly" path="eventDate" />
+								<span id="dateError"></span>
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
