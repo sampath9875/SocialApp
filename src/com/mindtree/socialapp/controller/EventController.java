@@ -26,7 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mindtree.socialapp.entities.Event;
 import com.mindtree.socialapp.entities.Location;
 import com.mindtree.socialapp.entities.Registration;
-import com.mindtree.socialapp.hibernate.SocialAppDao;
 import com.mindtree.socialapp.service.SocialAppService;
 
 /**

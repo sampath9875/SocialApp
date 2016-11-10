@@ -3,8 +3,6 @@
  */
 package com.mindtree.socialapp.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mindtree.socialapp.entities.Event;
 import com.mindtree.socialapp.entities.Location;
-import com.mindtree.socialapp.entities.Registration;
 import com.mindtree.socialapp.entities.User;
 import com.mindtree.socialapp.exceptions.InvalidLoginException;
 import com.mindtree.socialapp.service.SocialAppService;
