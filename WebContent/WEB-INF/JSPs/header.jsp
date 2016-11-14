@@ -20,8 +20,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="registration.get">Registration</a></li>
-      <li><a href="viewevents.get">View Events</a></li>
-      <li><a href="information.jsp">Info. Events</a></li>  
+      <li><a href="viewevents.get">Events Information</a></li>  
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="adminsignup.get"><span class="glyphicon glyphicon-user"></span> Admin Registration</a></li>

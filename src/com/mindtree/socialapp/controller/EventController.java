@@ -114,6 +114,6 @@ public class EventController {
 			li.addAll(socialAppService.getEventsForLocation(location));
 		}
 		map.put("events", li);
-		return new ModelAndView("viewevents", map);
+		return new ModelAndView("information", map);
 	}
 }

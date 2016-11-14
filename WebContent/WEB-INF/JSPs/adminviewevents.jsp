@@ -64,10 +64,7 @@
 						action="getEvents.action" commandName="event">
 						<h4>Search Events</h4>
 						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-1"></div>
-								<label class="col-sm-1" for="email">Enter Event location</label>
-								<div class="col-sm-5">
+								<label for="email">Enter Event location</label>
 									<form:select path="location.locationId" id="location"
 										class="form-control" onchange="display(this.value)">
 										<form:option value="0">Select location..</form:option>
@@ -77,18 +74,12 @@
 									</form:select>
 									<form:errors path="location.locationId" cssClass="error" />
 									<span id="locationError"></span>
-								</div>
-								<div class="col-sm-3"></div>
-							</div>
 						</div>
 						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-1"></div>
-								<label class="col-sm-1" for="phone">Select date</label>
-								<div class="col-sm-5">
+								<label for="phone">Select date</label>
 									<div class="input-group date" data-provide="datepicker">
 										<form:input type="text" class="form-control" id="eventDate"
-											readonly="readonly" path="eventDate" value="01/01/1970"/>
+											readonly="readonly" path="eventDate"/>
 										<span id="dateError"></span>
 										<div class="input-group-addon">
 											<span class="glyphicon glyphicon-th"></span>
@@ -101,12 +92,11 @@
 												.getMonth(), nowDate.getDate(),
 												0, 0, 0, 0);
 										$('.datepicker').datepicker({
-											todayHighlight : 1
+											todayHighlight : 1,
+											startDate : today,
+											value : today
 										});
 									</script>
-								</div>
-								<div class="col-sm-3"></div>
-							</div>
 						</div>
 						<div class="form-group">
 							<input type="submit" id="submit"
