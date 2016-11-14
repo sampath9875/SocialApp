@@ -178,18 +178,22 @@ public class AdminController {
 		if (sessionUser == null) {
 			return loginMandate(model);
 		} else {
-			List<Event> events;
+			List<Event> events = null;
 			if (event == null)
 				return "adminhome";
 			else {
 				Location location = event.getLocation();
-				if (location.getLocationId() == 0) {
+				if(location.getLocationId() != 0 && event.getEventDate() != null)
+				{
+					events = socialAppService.getEventsForSearch(event);
+				}
+				else if (location.getLocationId() == 0) {
 					events = socialAppService.getEventsForDate(event.getEventDate());
-				} else
+				} else{
 					events = socialAppService.getEventsForLocation(location);
+				}
 				model.addAttribute("events", events);
 			}
-
 			return "viewevents";
 		}
 	}

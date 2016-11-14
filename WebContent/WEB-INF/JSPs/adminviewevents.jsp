@@ -53,8 +53,11 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<h4>Admin Registration</h4>
-					<p>If you are an admin please register here</p>
+					<h4>Register Events</h4>
+					<p>Make technology to help alwaysMake technology to help
+						alwaysMake technology to help alwaysMake technology to help always</p>
+					<a href="registerevents.get" class="btn btn-primary">Register
+						Events</a>
 				</div>
 			</div>
 			<div class="col-md-1"></div>
@@ -64,28 +67,28 @@
 						action="getEvents.action" commandName="event">
 						<h4>Search Events</h4>
 						<div class="form-group">
-								<label for="email">Enter Event location</label>
-									<form:select path="location.locationId" id="location"
-										class="form-control" onchange="display(this.value)">
-										<form:option value="0">Select location..</form:option>
-										<jstl:forEach items="${locations}" var="location">
-											<form:option value="${location.locationId}"> ${location.locationDetails} </form:option>
-										</jstl:forEach>
-									</form:select>
-									<form:errors path="location.locationId" cssClass="error" />
-									<span id="locationError"></span>
+							<label for="email">Enter Event location</label>
+							<form:select path="location.locationId" id="location"
+								class="form-control" onchange="display(this.value)">
+								<form:option value="0">Select location..</form:option>
+								<jstl:forEach items="${locations}" var="location">
+									<form:option value="${location.locationId}"> ${location.locationDetails} </form:option>
+								</jstl:forEach>
+							</form:select>
+							<form:errors path="location.locationId" cssClass="error" />
+							<span id="locationError"></span>
 						</div>
 						<div class="form-group">
-								<label for="phone">Select date</label>
-									<div class="input-group date" data-provide="datepicker">
-										<form:input type="text" class="form-control" id="eventDate"
-											readonly="readonly" path="eventDate"/>
-										<span id="dateError"></span>
-										<div class="input-group-addon">
-											<span class="glyphicon glyphicon-th"></span>
-										</div>
-									</div>
-									<script type="text/javascript">
+							<label for="phone">Select date</label>
+							<div class="input-group date" data-provide="datepicker">
+								<form:input type="text" class="form-control" id="eventDate"
+									readonly="readonly" path="eventDate" />
+								<span id="dateError"></span>
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div>
+							<script type="text/javascript">
 										var nowDate = new Date();
 										var today = new Date(nowDate
 												.getFullYear(), nowDate

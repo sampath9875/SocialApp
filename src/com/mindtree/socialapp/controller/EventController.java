@@ -116,4 +116,9 @@ public class EventController {
 		map.put("events", li);
 		return new ModelAndView("information", map);
 	}
+	
+	@RequestMapping(value = "aboutus.get", method = RequestMethod.GET)
+	public String getAboutUs() {
+		return "aboutus";
+	}
 }

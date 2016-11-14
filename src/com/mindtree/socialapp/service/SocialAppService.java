@@ -83,4 +83,10 @@ public class SocialAppService {
 	public Location getLocationById(int id) {
 		return socialAppDao.getLocationById(id);
 	}
+	
+	public List<Event> getEventsForSearch(Event event)
+	{
+		return socialAppDao.getEventsForSearch(event);
+	}
+	
 }

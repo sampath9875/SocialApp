@@ -91,6 +91,29 @@ public class SocialAppDao {
 		return events;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Event> getEventsForSearch(Event event) {
+		Date date = event.getEventDate();
+		DetachedCriteria criteria = DetachedCriteria.forClass(Event.class);
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			date = dateFormat.parse(dateFormat.format(date));
+		} catch (ParseException e) {
+		}
+		long eventDate = date.getTime();
+
+		Date fromDate = new Date(eventDate - TimeUnit.DAYS.toMillis(1));
+		Date toDate = new Date(eventDate + TimeUnit.DAYS.toMillis(1));
+		criteria.add(Restrictions.ge("eventDate", fromDate));
+		criteria.add(Restrictions.lt("eventDate", toDate));
+		criteria.createCriteria("location", "loc");
+		criteria.add(Restrictions.eq("loc.locationId", event.getLocation().getLocationId()));
+
+		List<Event> eventsForDate = criteria.getExecutableCriteria(getSession()).list();
+		return eventsForDate;
+	}
+
 	public int saveLocation(Location location) {
 		Session session = getSession();
 		session.save(location);
@@ -108,7 +131,7 @@ public class SocialAppDao {
 		}
 		long eventDate = date.getTime();
 
-		Date fromDate = new Date(eventDate);
+		Date fromDate = new Date(eventDate - TimeUnit.DAYS.toMillis(1));
 		Date toDate = new Date(eventDate + TimeUnit.DAYS.toMillis(1));
 		criteria.add(Restrictions.ge("eventDate", fromDate));
 		criteria.add(Restrictions.lt("eventDate", toDate));

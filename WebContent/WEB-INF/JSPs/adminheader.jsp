@@ -15,7 +15,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="adminhome.jsp">Socail App</a>
+      <a class="navbar-brand" href="adminHome.get">Socail App</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="registerevents.get">Register Events</a></li>

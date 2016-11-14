@@ -28,7 +28,7 @@
 			<div class="jumbotron">
 				<h2>Social App</h2>
 				<p>Make technology to help always</p>
-				<a href="aboutus.jsp" class="btn btn-primary btn-md">About Us</a>
+				<a href="aboutus.get" class="btn btn-primary btn-md">About Us</a>
 			</div>
 		</div>
 	</div>
