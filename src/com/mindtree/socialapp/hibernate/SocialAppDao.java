@@ -131,7 +131,7 @@ public class SocialAppDao {
 		}
 		long eventDate = date.getTime();
 
-		Date fromDate = new Date(eventDate - TimeUnit.DAYS.toMillis(1));
+		Date fromDate = new Date(eventDate - 1);
 		Date toDate = new Date(eventDate + TimeUnit.DAYS.toMillis(1));
 		criteria.add(Restrictions.ge("eventDate", fromDate));
 		criteria.add(Restrictions.lt("eventDate", toDate));

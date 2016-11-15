@@ -76,6 +76,20 @@ public class User {
 	}
 
 	/**
+	 * @param name
+	 * @param userName
+	 * @param password
+	 * @param emailId
+	 */
+	public User(String name, String userName, String password, String emailId) {
+		super();
+		this.name = name;
+		this.userName = userName;
+		this.password = password;
+		this.emailId = emailId;
+	}
+
+	/**
 	 * @return the userId
 	 */
 	public int getUserId() {

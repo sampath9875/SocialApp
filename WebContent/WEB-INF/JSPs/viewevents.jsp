@@ -25,8 +25,9 @@
 <body style="background-color: lavendar; overflow: hidden">
 	<jsp:include page="adminheader.jsp" />
 	<div class="container">
+	<h4>Events</h4>
 		<jstl:choose>
-			<jstl:when test="${fn:length(events) gt 0}">
+			<jstl:when test="${fn:length(eventsSearch) gt 0}">
 				<table class="table table-striped">
 					<thead>
 						<tr class="info">
@@ -37,7 +38,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<jstl:forEach items="${events}" var="event">
+						<jstl:forEach items="${eventsSearch}" var="event">
 							<tr>
 								<td><jstl:out value="${event.eventName}"></jstl:out></td>
 								<td><jstl:out value="${event.format(event.getEventDate())}"></jstl:out></td>
@@ -54,6 +55,68 @@
 					<h4>There are no events for the given filters</h4>
 					<p>Please click here to go to home page</p>
 					<a href="adminHome.get" class="btn btn-primary">Home</a>
+				</div>
+			</jstl:otherwise>
+		</jstl:choose>
+		<h4>Other Events on given location</h4>
+		<jstl:choose>
+			<jstl:when test="${fn:length(eventsLocation) gt 0}">
+				<table class="table table-striped">
+					<thead>
+						<tr class="info">
+							<th>Event Name</th>
+							<th>Event Date</th>
+							<th>Event Location</th>
+							<th>Registration Link</th>
+						</tr>
+					</thead>
+					<tbody>
+						<jstl:forEach items="${eventsLocation}" var="event">
+							<tr>
+								<td><jstl:out value="${event.eventName}"></jstl:out></td>
+								<td><jstl:out value="${event.format(event.getEventDate())}"></jstl:out></td>
+								<td><jstl:out value="${event.location.locationDetails}"></jstl:out></td>
+								<td><a href="viewVolunteers?eventId=${event.eventId}">Click
+										to View Registrations</a></td>
+							</tr>
+						</jstl:forEach>
+					</tbody>
+				</table>
+			</jstl:when>
+			<jstl:otherwise>
+				<div class="jumbotron">
+					<h4>There are no Other events for the given location</h4>
+				</div>
+			</jstl:otherwise>
+		</jstl:choose>
+		<h4>Other Events on given Date</h4>
+		<jstl:choose>
+			<jstl:when test="${fn:length(eventsDate) gt 0}">
+				<table class="table table-striped">
+					<thead>
+						<tr class="info">
+							<th>Event Name</th>
+							<th>Event Date</th>
+							<th>Event Location</th>
+							<th>Registration Link</th>
+						</tr>
+					</thead>
+					<tbody>
+						<jstl:forEach items="${eventsDate}" var="event">
+							<tr>
+								<td><jstl:out value="${event.eventName}"></jstl:out></td>
+								<td><jstl:out value="${event.format(event.getEventDate())}"></jstl:out></td>
+								<td><jstl:out value="${event.location.locationDetails}"></jstl:out></td>
+								<td><a href="viewVolunteers?eventId=${event.eventId}">Click
+										to View Registrations</a></td>
+							</tr>
+						</jstl:forEach>
+					</tbody>
+				</table>
+			</jstl:when>
+			<jstl:otherwise>
+				<div class="jumbotron">
+					<h4>There are no Other events for the given Date</h4>
 				</div>
 			</jstl:otherwise>
 		</jstl:choose>

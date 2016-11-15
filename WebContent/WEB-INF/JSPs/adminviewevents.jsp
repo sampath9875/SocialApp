@@ -23,11 +23,14 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 <script type="text/javascript">
 	function validateForm() {
-		var location = document.getElementById("location").value;
+		var loc = document.getElementById("location");
+		var location = loc.options[loc.selectedIndex].value;
 		var eventDate = document.getElementById("eventDate").value;
-
-		if (location == "0" && eventDate == "") {
-			document.getElementById("errorMessage").innerHTML = "Please select a location or a date";
+		if (location == "0") {
+			alert("Please select a location ");
+			return false;
+		} else if (eventDate == "") {
+			alert("Please select a Date ");
 			return false;
 		} else {
 			return true;
@@ -63,7 +66,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<form:form method="post" onsubmit="return validateForm()"
+					<form:form method="post" onsubmit="return validateForm();"
 						action="getEvents.action" commandName="event">
 						<h4>Search Events</h4>
 						<div class="form-group">
@@ -89,17 +92,16 @@
 								</div>
 							</div>
 							<script type="text/javascript">
-										var nowDate = new Date();
-										var today = new Date(nowDate
-												.getFullYear(), nowDate
-												.getMonth(), nowDate.getDate(),
-												0, 0, 0, 0);
-										$('.datepicker').datepicker({
-											todayHighlight : 1,
-											startDate : today,
-											value : today
-										});
-									</script>
+								var nowDate = new Date();
+								var today = new Date(nowDate.getFullYear(),
+										nowDate.getMonth(), nowDate.getDate(),
+										0, 0, 0, 0);
+								$('.datepicker').datepicker({
+									todayHighlight : 1,
+									startDate : today,
+									value : today
+								});
+							</script>
 						</div>
 						<div class="form-group">
 							<input type="submit" id="submit"

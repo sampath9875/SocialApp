@@ -178,21 +178,32 @@ public class AdminController {
 		if (sessionUser == null) {
 			return loginMandate(model);
 		} else {
-			List<Event> events = null;
+			List<Event> eventsSearch = null;
+			List<Event> eventsLocation = null;
+			List<Event> eventsDate = null;
 			if (event == null)
 				return "adminhome";
 			else {
 				Location location = event.getLocation();
 				if(location.getLocationId() != 0 && event.getEventDate() != null)
 				{
-					events = socialAppService.getEventsForSearch(event);
+					eventsSearch = socialAppService.getEventsForSearch(event);
+					eventsDate = socialAppService.getEventsForDate(event.getEventDate());
+					eventsLocation = socialAppService.getEventsForLocation(location);
 				}
-				else if (location.getLocationId() == 0) {
-					events = socialAppService.getEventsForDate(event.getEventDate());
-				} else{
-					events = socialAppService.getEventsForLocation(location);
+				for (Event event2 : eventsSearch) {
+					if(eventsLocation.contains(event2))
+					{
+						eventsLocation.remove(event2);
+					}
+					if(eventsDate.contains(event2))
+					{
+						eventsDate.remove(event2);
+					}
 				}
-				model.addAttribute("events", events);
+				model.addAttribute("eventsSearch", eventsSearch);
+				model.addAttribute("eventsLocation", eventsLocation);
+				model.addAttribute("eventsDate", eventsDate);
 			}
 			return "viewevents";
 		}
