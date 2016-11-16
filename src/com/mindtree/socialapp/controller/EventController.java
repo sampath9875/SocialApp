@@ -5,6 +5,7 @@ package com.mindtree.socialapp.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mindtree.socialapp.entities.Event;
+import com.mindtree.socialapp.entities.EventComparator;
 import com.mindtree.socialapp.entities.Location;
 import com.mindtree.socialapp.entities.Registration;
 import com.mindtree.socialapp.service.SocialAppService;
@@ -68,9 +70,9 @@ public class EventController {
 
 	@ResponseBody
 	@RequestMapping(value = "getEvents", method = RequestMethod.GET, produces = "application/json")
-	public String getEvents(@RequestBody String location, HttpServletRequest request, HttpServletResponse response)
+	public String getEvents(@RequestBody String place, HttpServletRequest request, HttpServletResponse response)
 			throws ParseException {
-		int locationId = Integer.parseInt(request.getParameter("location"));
+		int locationId = Integer.parseInt(request.getParameter("place"));
 		Location loc = new Location();
 		loc.setLocationId(locationId);
 		List<Event> li = socialAppService.getEventsForLocation(loc);
@@ -80,6 +82,7 @@ public class EventController {
 					+ event.getEventName() + "',";
 		}
 		str += " }";
+		System.out.println(str);
 		return str;
 	}
 
@@ -113,6 +116,7 @@ public class EventController {
 		for (Location location : locations) {
 			li.addAll(socialAppService.getEventsForLocation(location));
 		}
+		Collections.sort(li,new EventComparator());
 		map.put("events", li);
 		return new ModelAndView("information", map);
 	}

@@ -86,7 +86,7 @@
 			document.getElementById("phone").value = "";
 			document.getElementById("phone").focus();
 			return false;
-		} else if (location == "select") {
+		} else if (location == "0") {
 			document.getElementById("nameError").innerHTML = "";
 			document.getElementById("employeeIdError").innerHTML = "";
 			document.getElementById("emailError").innerHTML = "";
@@ -119,9 +119,9 @@
 		$.ajax({
 			type : "get",
 			contentType : "application/text",
-			url : "getEvents",
+			url : "getEvents?place="+location,
 			data : {
-				"location" : location
+				
 			},
 			success : function(data) {
 				var json = JSON.stringify(eval("(" + data + ")"));
@@ -148,8 +148,8 @@
 		document.getElementById("volunteerId").value = "";
 		document.getElementById("phone").value = "";
 		document.getElementById("email").value = "";
-		document.getElementById("location").value = "select";
-		document.getElementById("eventName").value = "select";
+		document.getElementById("location").value = "0";
+		document.getElementById("eventName").value = "0";
 	}
 
 	//window.onload = init;
@@ -232,7 +232,7 @@
 						<div class="col-sm-5">
 							<form:select path="event.location.locationId" id="location"
 								class="form-control" onchange="display(this.value)">
-								<form:option value="select">Select location..</form:option>
+								<form:option value="0">Select location..</form:option>
 								<jstl:forEach items="${locations}" var="location">
 									<form:option value="${location.locationId}"> ${location.locationDetails} </form:option>
 								</jstl:forEach>

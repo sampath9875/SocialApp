@@ -24,6 +24,7 @@
         <th>Event Name</th>
         <th>Event Date</th>
         <th>Event Location</th>
+        <th>Event Details</th>
         <th>Registration Link</th>
       </tr>
     </thead>
@@ -33,6 +34,7 @@
     <td><jstl:out value="${event.eventName}"></jstl:out></td>
     <td><jstl:out value="${event.format(event.getEventDate())}"></jstl:out></td>
     <td><jstl:out value="${event.location.locationDetails}"></jstl:out></td>
+    <td><jstl:out value="${event.eventDetails}"></jstl:out></td>
     <td><a href="registration.get">Click to Register</a></td>
     </tr>
     </jstl:forEach>

@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Registration</title>
 </head>
-<body style="background-color: lavendar">
+<body>
 <div class="footer navbar-fixed-bottom">
 <hr><p class="muted" align="center">
 <span class="glyphicon glyphicon-copyright-mark"></span> Copy Rights Mani and Shanmukh</p>

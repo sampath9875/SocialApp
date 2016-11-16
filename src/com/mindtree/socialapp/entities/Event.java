@@ -36,7 +36,10 @@ public class Event {
 
 	@Column(name = "Event_Name", nullable = false)
 	private String eventName;
-
+	
+	@Column(name = "Event_Details")
+	private String eventDetails;
+	
 	@ManyToOne(targetEntity = Location.class)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "Location_Id", nullable = false)
@@ -163,6 +166,21 @@ public class Event {
 
 	public String format(Date date) {
 		return new SimpleDateFormat("dd MMM yyyy").format(date);
+	}
+
+	
+	/**
+	 * @return
+	 */
+	public String getEventDetails() {
+		return eventDetails;
+	}
+
+	/**
+	 * @param eventDetails
+	 */
+	public void setEventDetails(String eventDetails) {
+		this.eventDetails = eventDetails;
 	}
 
 	@Override

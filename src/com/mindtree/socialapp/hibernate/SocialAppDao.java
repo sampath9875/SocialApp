@@ -161,4 +161,10 @@ public class SocialAppDao {
 
 		return registrations;
 	}
+
+	public int registerLocation(Location location) {
+		Session session = getSession();
+		session.save(location);
+		return location.getLocationId();
+	}
 }

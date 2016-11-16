@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <title>About Us</title>
 </head>
-<body style="background-color: lavendar;overflow: hidden" >
+<body style="overflow: hidden" >
 <jsp:include page="header.jsp" />
 <div class="container">
 <div class="row">

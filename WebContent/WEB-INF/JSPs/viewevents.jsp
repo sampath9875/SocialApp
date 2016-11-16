@@ -84,9 +84,7 @@
 				</table>
 			</jstl:when>
 			<jstl:otherwise>
-				<div class="jumbotron">
-					<h4>There are no Other events for the given location</h4>
-				</div>
+					<h5>There are no Other events for the given location</h5>
 			</jstl:otherwise>
 		</jstl:choose>
 		<h4>Other Events on given Date</h4>
@@ -115,9 +113,7 @@
 				</table>
 			</jstl:when>
 			<jstl:otherwise>
-				<div class="jumbotron">
-					<h4>There are no Other events for the given Date</h4>
-				</div>
+					<h5>There are no Other events for the given Date</h5>
 			</jstl:otherwise>
 		</jstl:choose>
 	</div>

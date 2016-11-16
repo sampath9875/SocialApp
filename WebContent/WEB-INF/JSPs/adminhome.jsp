@@ -55,6 +55,17 @@
 			</div>
 		</div>
 	</jstl:if>
+	<jstl:if test="${locId!=null}">
+		<div class="container">
+			<div class="row">
+				<div class="jumbotron">
+					<div>
+						<jstl:out value="Location Successfully registered with Id: ${locId}"></jstl:out>
+					</div>
+				</div>
+			</div>
+		</div>
+	</jstl:if>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5">

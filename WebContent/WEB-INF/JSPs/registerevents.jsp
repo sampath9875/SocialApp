@@ -24,12 +24,14 @@
 <script type="text/javascript">
 	function validateForm() {
 		var name = document.getElementById("name").value;
+		var details = document.getElementById("details").value;
 		var location = document.getElementById("location").value;
 		var eventDate = document.getElementById("eventDate").value;
 
 		/* var dateCheck = /^?[0-2][0-9]{1}+[\/]{1}+?[0-3][0-9]{1}+[\/]{1}+[1-2]{1}[0-9]{3}$/; */
 		var nameCheck = /[a-zA-Z ]{3,20}$/;
-
+		var detCheck = /[a-zA-Z ,]$/;
+		
 		if (name == "") {
 			document.getElementById("nameError").innerHTML = "Name Cannot be Empty";
 			return false;
@@ -45,7 +47,13 @@
 		} else if (!nameCheck.test(name)) {
 			document.getElementById("nameError").innerHTML = "Please enter only alphabets";
 			return false;
-		} else {
+		} else if (details == "") {
+			document.getElementById("detError").innerHTML = "Details Cannot be Empty";
+			return false;
+		}else if (!detCheck.test(details)) {
+			document.getElementById("detError").innerHTML = "Please enter only alphabets";
+			return false;
+		}else {
 			return true;
 		}
 	};
@@ -74,13 +82,28 @@
 						<label class="col-sm-2" for="name">Enter Event name</label>
 						<div class="col-sm-5">
 							<form:input type="text" id="name" class="form-control"
-								path="eventName" />
+								path="eventName" placeHolder="E.g: One Good Deed"/>
 							<form:errors path="eventName" class="error"></form:errors>
 							<span id="nameError"></span>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-2"></div>
+						<label class="col-sm-2" for="name">Enter Event Details</label>
+						<div class="col-sm-5">
+							<form:input type="textArea" id="details" class="form-control"
+								path="eventDetails" placeHolder="E.g: Serving Lunch"/>
+							<form:errors path="eventDetails" class="error"></form:errors>
+							<span id="detError"></span>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<div class="row">
 						<div class="col-sm-2"></div>

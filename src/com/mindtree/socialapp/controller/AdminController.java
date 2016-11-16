@@ -39,7 +39,7 @@ public class AdminController {
 
 	@Autowired(required = true)
 	private Event event;
-
+	
 	@Autowired
 	private SocialAppService socialAppService;
 
@@ -60,6 +60,35 @@ public class AdminController {
 	public String adminSignUp(Model model) {
 		model.addAttribute("user", user);
 		return "adminsignup";
+	}
+	
+	@RequestMapping(value = "location.get", method = RequestMethod.GET)
+	public String getLocation(Model model,HttpServletRequest request) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else {
+			model.addAttribute("location", new Location());
+			return "location";
+		}
+	}
+	
+	@RequestMapping(value = "location.action", method = RequestMethod.POST)
+	public String registerEvent(@ModelAttribute Location location, BindingResult result, HttpServletRequest request,
+			Model model) {
+		User sessionUser = (User) request.getSession().getAttribute("user");
+		if (sessionUser == null) {
+			return loginMandate(model);
+		} else if (result.hasErrors()) {
+			return "redirect:/error?message=The%20user%20object%20passed%20has%20some%20errors2E%20Please%20try%20again";
+		} else {
+			int regId = socialAppService.registerLocation(location);
+			if (regId > 0)
+				model.addAttribute("locId", regId);
+			else
+				model.addAttribute("message", "Failed to register Event. Please try again");
+			return "adminhome";
+		}
 	}
 
 	@ResponseBody

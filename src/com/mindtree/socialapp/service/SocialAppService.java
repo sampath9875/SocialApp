@@ -75,6 +75,10 @@ public class SocialAppService {
 	public int registerEvent(Event event) {
 		return socialAppDao.registerEvent(event);
 	}
+	
+	public int registerLocation(Location location) {
+		return socialAppDao.registerLocation(location);
+	}
 
 	public int registerForEvent(Registration registration) {
 		return socialAppDao.registerForEvent(registration);
