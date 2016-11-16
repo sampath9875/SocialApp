@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="jumbotron">
 				<h2>Social App</h2>
-				<p>Make technology to help always</p>
+				<p>Welcome to the Admin Home page</p>
 			</div>
 		</div>
 	</div>
@@ -49,7 +49,8 @@
 			<div class="row">
 				<div class="jumbotron">
 					<div>
-						<jstl:out value="Event Successfully registered with Id: ${eventId}"></jstl:out>
+						<jstl:out
+							value="Event Successfully registered with Id: ${eventId}"></jstl:out>
 					</div>
 				</div>
 			</div>
@@ -60,7 +61,8 @@
 			<div class="row">
 				<div class="jumbotron">
 					<div>
-						<jstl:out value="Location Successfully registered with Id: ${locId}"></jstl:out>
+						<jstl:out
+							value="Location Successfully registered with Id: ${locId}"></jstl:out>
 					</div>
 				</div>
 			</div>
@@ -70,8 +72,8 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<h4>Register Events</h4>
-					<p>Make technology to help always</p>
+					<p>Register Events</p>
+					<h4>Click here to register events</h4>
 					<a href="registerevents.get" class="btn btn-primary">Register
 						Events</a>
 				</div>
@@ -79,8 +81,8 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<h4>Admin Login</h4>
-					<p>Make technology to help always</p>
+					<p>View Events</p>
+					<h4>Click here to view Events</h4>
 					<a href="adminviewevents.get" class="btn btn-primary">View
 						Events/Volunteers</a>
 				</div>

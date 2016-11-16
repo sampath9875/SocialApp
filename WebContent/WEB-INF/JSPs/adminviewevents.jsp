@@ -56,9 +56,8 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<h4>Register Events</h4>
-					<p>Make technology to help alwaysMake technology to help
-						alwaysMake technology to help alwaysMake technology to help always</p>
+					<p>Register Events</p>
+					<h4>Click here to register Events</h4>
 					<a href="registerevents.get" class="btn btn-primary">Register
 						Events</a>
 				</div>
@@ -70,7 +69,7 @@
 						action="getEvents.action" commandName="event">
 						<h4>Search Events</h4>
 						<div class="form-group">
-							<label for="email">Enter Event location</label>
+							<label for="email">Select Event location *</label>
 							<form:select path="location.locationId" id="location"
 								class="form-control" onchange="display(this.value)">
 								<form:option value="0">Select location..</form:option>
@@ -82,7 +81,7 @@
 							<span id="locationError"></span>
 						</div>
 						<div class="form-group">
-							<label for="phone">Select date</label>
+							<label for="phone">Select date *</label>
 							<div class="input-group date" data-provide="datepicker">
 								<form:input type="text" class="form-control" id="eventDate"
 									readonly="readonly" path="eventDate" />

@@ -35,7 +35,7 @@
 		if (name == "") {
 			document.getElementById("nameError").innerHTML = "Name Cannot be Empty";
 			return false;
-		} else if (location == "select") {
+		} else if (location == "0") {
 			document.getElementById("nameError").innerHTML = "";
 			document.getElementById("locationError").innerHTML = "Please select a location";
 			return false;
@@ -111,7 +111,7 @@
 						<div class="col-sm-5">
 							<form:select path="location.locationId" id="location"
 								class="form-control" onchange="display(this.value)">
-								<form:option value="select">Select location..</form:option>
+								<form:option value="0">Select location..</form:option>
 								<jstl:forEach items="${locations}" var="location">
 									<form:option value="${location.locationId}"> ${location.locationDetails} </form:option>
 								</jstl:forEach>

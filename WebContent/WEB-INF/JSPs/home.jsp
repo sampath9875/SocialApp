@@ -27,7 +27,8 @@
 		<div class="row">
 			<div class="jumbotron">
 				<h2>Social App</h2>
-				<p>Make technology to help always</p>
+				<p>Welcome to the Social App. You can register for various
+					events here and also manage them if you are an admin</p>
 				<a href="aboutus.get" class="btn btn-primary btn-md">About Us</a>
 			</div>
 		</div>
@@ -36,18 +37,20 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<h4>Registration</h4>
-					<p>Make technology to help always</p>
+					<p>Registration</p>
+					<h4>Please click below to register for an event</h4>
 					<a href="registration.get" class="btn btn-primary">Registration</a>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				<div class="jumbotron">
-					<h4>Admin Login</h4>
-					<p>Make technology to help always</p>
-					<a href="adminlogin.get" class="btn btn-primary">Admin Login</a>
-				</div>
+					<p>Admin Login</p>
+					<h4>
+						Click here to go to the admin module </h4>
+				<a href="adminlogin.get"
+							class="btn btn-primary">Admin Login</a>
+					</div>
 			</div>
 		</div>
 	</div>

@@ -21,7 +21,7 @@
 <div class="row">
 <div class="jumbotron">
 <h2>Social App</h2>
-<p>Make technology to help always</p>
+<p>This application is developed as a part of SDET training by Maneendra and Shanmukha</p>
 </div>
 </div>
 </div>

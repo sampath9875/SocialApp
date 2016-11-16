@@ -14,7 +14,7 @@
 <body>
 <div class="footer navbar-fixed-bottom">
 <hr><p class="muted" align="center">
-<span class="glyphicon glyphicon-copyright-mark"></span> Copy Rights Mani and Shanmukh</p>
+<span class="glyphicon glyphicon-copyright-mark"></span> Copy Rights Mani and Shanmukha</p>
 </div>
 </body>
 </html>
