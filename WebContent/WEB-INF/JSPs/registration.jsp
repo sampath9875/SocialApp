@@ -112,6 +112,7 @@
 			var optionSelected = $("option:selected", this);
 			var val = this.value;
 			$('#eventName').empty();
+			document.getElementById("eventError").innerHTML = "";
 			ajaxLoad(val);
 		});
 	});
@@ -119,10 +120,11 @@
 		$.ajax({
 			type : "get",
 			contentType : "application/text",
-			url : "getEvents?place="+location,
+			url : "getEvents",
 			data : {
-				
+				"place" : location
 			},
+			dataType: "text",
 			success : function(data) {
 				var json = JSON.stringify(eval("(" + data + ")"));
 				var data1 = JSON.parse(json);
@@ -136,10 +138,9 @@
 				});
 			},
 			error : function() {
-				alert("fail");
+				document.getElementById("eventError").innerHTML = "No Events";
 			},
 			done : function() {
-				alert("done");
 			}
 		});
 	}
@@ -155,8 +156,7 @@
 	//window.onload = init;
 </script>
 </head>
-<body style="background-color: lavendar; overflow: hidden"
-	onload="init()">
+<body style="background-color: lavendar; overflow: hidden">
 	<jsp:include page="header.jsp" />
 	<form:form id="registration" onsubmit="return validate();"
 		class="form-horizontal" method="post" action="register.action"

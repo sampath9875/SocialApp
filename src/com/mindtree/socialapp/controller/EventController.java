@@ -70,7 +70,7 @@ public class EventController {
 
 	@ResponseBody
 	@RequestMapping(value = "getEvents", method = RequestMethod.GET, produces = "application/json")
-	public String getEvents(@RequestBody String place, HttpServletRequest request, HttpServletResponse response)
+	public String getEvents(HttpServletRequest request, HttpServletResponse response)
 			throws ParseException {
 		int locationId = Integer.parseInt(request.getParameter("place"));
 		Location loc = new Location();
@@ -82,7 +82,6 @@ public class EventController {
 					+ event.getEventName() + "',";
 		}
 		str += " }";
-		System.out.println(str);
 		return str;
 	}
 

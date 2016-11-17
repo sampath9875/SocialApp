@@ -27,14 +27,22 @@
 		var location = loc.options[loc.selectedIndex].value;
 		var eventDate = document.getElementById("eventDate").value;
 		if (location == "0") {
-			alert("Please select a location ");
+			document.getElementById("locationError").innerHTML = "Location Cannot be Empty";
+			document.getElementById("dateError").innerHTML = "";
 			return false;
 		} else if (eventDate == "") {
-			alert("Please select a Date ");
+			document.getElementById("locationError").innerHTML = "";
+			document.getElementById("dateError").innerHTML = "Please select Date";
 			return false;
 		} else {
+			document.getElementById("locationError").innerHTML = "";
+			document.getElementById("dateError").innerHTML = "";
 			return true;
 		}
+	};
+	function display(id)
+	{
+		document.getElementById(id).innerHTML = "";
 	};
 </script>
 <title>View Events</title>
@@ -71,7 +79,7 @@
 						<div class="form-group">
 							<label for="email">Select Event location *</label>
 							<form:select path="location.locationId" id="location"
-								class="form-control" onchange="display(this.value)">
+								class="form-control" onchange="display('locationError')">
 								<form:option value="0">Select location..</form:option>
 								<jstl:forEach items="${locations}" var="location">
 									<form:option value="${location.locationId}"> ${location.locationDetails} </form:option>
@@ -84,8 +92,7 @@
 							<label for="phone">Select date *</label>
 							<div class="input-group date" data-provide="datepicker">
 								<form:input type="text" class="form-control" id="eventDate"
-									readonly="readonly" path="eventDate" />
-								<span id="dateError"></span>
+									readonly="readonly" path="eventDate" onchange="display('dateError')"/>
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-th"></span>
 								</div>
@@ -101,6 +108,9 @@
 									value : today
 								});
 							</script>
+							<div>
+								<span id="dateError"></span>
+								</div>
 						</div>
 						<div class="form-group">
 							<input type="submit" id="submit"

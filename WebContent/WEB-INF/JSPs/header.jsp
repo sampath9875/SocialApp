@@ -19,7 +19,7 @@
 <nav class="navbar navbar-custom">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="home">Socail App</a>
+      <a class="navbar-brand" href="home">Social App</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="registration.get">Registration</a></li>
@@ -31,6 +31,7 @@
    		 <li><a href="aboutus.get"><span class="glyphicon glyphicon-info-sign"></span> About us&nbsp;&nbsp;</a></li>
     </ul>
   </div>
+  <hr>
 </nav>
 </div>
 </body>
